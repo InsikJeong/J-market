@@ -28,7 +28,8 @@ class FashionRequest extends FormRequest
              // 유효성체크 필드 설정 룰 저장
                 'name'=> ['required'],
                 'price'=> ['required'],
-                'comments'=> ['required']    
+                'comments'=> ['required']    ,
+                'files'=>['required']
         ];
     }
     public function messages()

@@ -83,7 +83,9 @@ class FashionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $good = \App\Goods::whereId($id)->first();
+
+        return view('fashion.edit',compact('good'));
     }
 
     /**
@@ -93,9 +95,30 @@ class FashionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(\App\Http\Requests\FashionRequest $request, $id)
     {
-        //
+        if($request->hasFile('files')){
+            $files = $request->file('files');
+            foreach($files as $file) {
+                $filename = Str::random().filter_var($file->getClientOriginalName(), FILTER_SANITIZE_URL);
+                
+                \App\Goods::where('id',$id)->update([
+                    'num'=>1,
+                    'name'=>$request->name,
+                    'price'=>$request->price,
+                    'comments'=>$request->comments,
+                    'filename' => $filename,
+                ]);
+        
+
+                $file->move(fashions_attachments_path(), $filename);
+            }
+        }
+        $fashion = \App\Goods::where('id',$id)->first();
+
+
+        return view('fashion.show',compact('fashion'));
+       
     }
 
     /**
@@ -106,6 +129,8 @@ class FashionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $goods =\App\Goods::whereId($id)->delete();
+    
+        return response()->json([],204);
     }
 }

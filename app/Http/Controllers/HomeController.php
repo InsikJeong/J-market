@@ -23,9 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $goods = \App\Goods::get();
+        $goods = \App\Goods::get();
         
-        // return view('main.index',compact('goods'));
-        return redirct('/');
+        return view('main.index',compact('goods'));
+        // return redirct('/');
+
+        // return view('main.index');
+
     }
 }

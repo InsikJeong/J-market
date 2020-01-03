@@ -47,6 +47,11 @@
             </div>
         </div>
 @stop
+
+@section('script')
+    <script>
+    </script>
+@stop
 @section('style')
     <style>
         .nameDiv>a{
@@ -74,6 +79,7 @@
         }
         .best-img-div{
             display:flex;
+            flex-wrap : wrap;
             text-align:center;
         }
         .imgDiv>img{

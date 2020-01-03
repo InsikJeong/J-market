@@ -12,7 +12,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{asset('myJs.js')}}"></script>
-    </script>
     @yield('script')
 
 
@@ -92,6 +91,8 @@
             @include('layouts.category')
             <div class="mainDiv">
                 @yield('content')
+            </div>
+            @yield('loginCon')
         </div>
         </main>
     </div>

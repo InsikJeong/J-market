@@ -2,10 +2,10 @@
 
 @section('content')
     <div clase="btnCre">
-    <a href="fashions/create" class="btn btn-primary">상품 추가</a>
-    <br>
-    <br>
+        <a href="fashions/create" class="btn btn-primary">상품 추가</a>
     </div>
+    <br>
+    <br>
     @forelse ($fashions as $goods)
         <div id="fashion{{$goods->id}}" class="fashionDiv">
             <div id="imgDiv" class="imgDiv">
@@ -21,6 +21,12 @@
     @empty
     @endforelse
 @stop
+
+@section('script')
+    <script>
+    </script>
+@stop
+
 @section('style')
     <style>
         .nameDiv>a{
@@ -45,9 +51,4 @@
         }
 
     </style>
-@stop
-
-@section('script')
-    <script>
-    </script>
 @stop

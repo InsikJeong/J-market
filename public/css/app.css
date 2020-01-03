@@ -6,6 +6,10 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+ img{
+   border : 1px solid #BDBDBD; 
+   margin-right:10px;
+ }
  .navbar-div>div{
   border: 1px solid white;
   background-color: #3490dc;
@@ -248,7 +252,7 @@ figure {
 
 img {
   vertical-align: middle;
-  border-style: none;
+  /* border-style: none; */
 }
 
 svg {
