@@ -13,9 +13,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = \App\Cart::get();
 
-        return view('payment.cart');
     }
 
     /**
@@ -36,7 +34,21 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        $goods= \App\Goods::whereId($request->id)->first();
         
+
+        \App\Cart::create([
+            'num'=>$goods->num,
+            'name'=>$goods->name,
+            'price'=>$goods->price,
+            'comments'=>$goods->comments,
+            'filename'=>$goods->filename,
+            'count'=>$request->count,
+        ]);
+        
+        $carts=\App\Cart::get();
+
+        return view('payment.cart',compact('carts'));
     }
 
     /**
@@ -47,7 +59,6 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**

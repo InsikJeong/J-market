@@ -16,8 +16,10 @@
             <br>
             <br>
             <br>
-            <form action="{{route('cart.store')}}" method='post'>
-                <input type="number" name="count"> 개 
+            <form action="{{route('cart.store')}}" method='POST'>
+                {!! csrf_field() !!}
+                <input type="number" name="count" value=1> 개 
+                <input type="text" name='id' class="showId" value="{{$fashion->id}}">
                 <br>
                 <br>
                 <a href="/buy" class="btn btnBuy">바로 구매</a>
@@ -103,6 +105,9 @@
 
 @section('style')
     <style>
+        .showId{
+            display:none;
+        }
         .btnBuy{
             width:200px;
             height:50px;
