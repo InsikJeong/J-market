@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{route('fashions.store')}}" method="POST" enctype="multipart/form-data">상품 등록
+    <form class="creForm"action="{{route('fashions.store')}}" method="POST" enctype="multipart/form-data">
         {!! csrf_field() !!}
+        <h3>상품 등록</h3>
         <br>
         <label>상품 이름</label>
         <input type="text" name='name'>
@@ -23,5 +24,15 @@
 
         <button>등록 완료</button>
     </form> 
-
+@stop
+@section('style')
+    <style>
+        .creForm>input{
+            width:740px;
+            margin-left:30px;
+        }
+        .creForm>textarea{
+            margin-left:30px;
+        }
+    </style>        
 @stop

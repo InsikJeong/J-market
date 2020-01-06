@@ -7,13 +7,29 @@
             <h3>{{$fashion->name}}</h3>
             <br>
             <p>{{$fashion->comments}}</p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <form action="{{route('cart.store')}}" method='post'>
+                <input type="number" name="count"> 개 
+                <br>
+                <br>
+                <a href="/buy" class="btn btnBuy">바로 구매</a>
+                <button class="btn btnCart">장바구니 담기</button>
+            </form>
         </div>
     </div> 
     <br>
     <br>
     <br>
     
-    <a class="btn btn-success btnEdit" href="/fashions/{{$fashion->id}}/edit">상품 수정</a>
+    <a class="btn btn-primary btnEdit" href="/fashions/{{$fashion->id}}/edit">상품 수정</a>
     <label class="btn btn-danger btnDel" id="btnDel{{$fashion->id}}" onclick="del({{$fashion->id}})">상품 삭제</label>            
     
     <br>
@@ -87,6 +103,20 @@
 
 @section('style')
     <style>
+        .btnBuy{
+            width:200px;
+            height:50px;
+            line-height:40px;
+            background-color:#3490dc;
+            color:white;
+        }
+        .btnCart{
+            width:200px;
+            height:50px;
+            line-height:40px;
+            background-color:white;
+            border:1px solid black;
+        }
         .btnDel{
             margin-top: 8px;
         }

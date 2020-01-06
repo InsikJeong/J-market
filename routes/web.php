@@ -16,7 +16,6 @@ Route::get('/', function () {
     return view('main.index',compact('goods'));
 });
 
-    
 
 Auth::routes();
 
@@ -26,5 +25,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+//상품들
 Route::resource('/fashions','FashionsController');
+
+// 결제
+Route::resource('/buy','BuyController');
+//장바구니
+Route::resource('/cart','CartController');

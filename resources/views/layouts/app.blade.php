@@ -76,7 +76,7 @@
                                     </form>
 
                                     <li class="nav-item">
-                                        <a href="" class="nav-link">{{ __('Cart') }}</a>
+                                        <a href="/cart" class="nav-link">{{ __('Cart') }}</a>
                                     </li>
                                 </div>
                             </li>
