@@ -72,7 +72,13 @@
                                     </form>
 
                                     <li class="nav-item">
+                                    @if(Auth::user())
                                         <a href="/cart" class="nav-link">{{ __('Cart') }}</a>
+                                    
+                                    @else{
+                                        
+                                    }
+                                    @endif
                                     </li>
                                 </div>
                             </li>

@@ -31,12 +31,12 @@
             <h3>Best Sellers</h3>
             <div class="best-img-div">
                 @forelse ($goods as $good)
-                    <div id="fashion{{$good->id}}" class="fashionDiv">
+                    <div id="good{{$good->id}}" class="goodDiv">
                         <div id="imgDiv" class="imgDiv">
-                            <img src="/fashion/{{$good->filename}}" alt="이미지없음" onclick="imgClick({{$good->num}},{{$good->id}})">
+                            <img src="/goods/{{$good->filename}}" alt="이미지없음" onclick="imgClick({{$good->num}},{{$good->id}})">
                         </div>
                         <div class="nameDiv">
-                            <a href="{{route('fashions.show',$good->id)}}">{{$good->name}}</a>
+                            <a href="{{route('goods.show',$good->id)}}">{{$good->name}}</a>
                         </div>
                         <div class="price">
                             <label >{{$good->price}} 원</label>            

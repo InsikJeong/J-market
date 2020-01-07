@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form action="/fashions/{{$good->id}}" class="form__article" method="post" enctype="multipart/form-data">상품 수정
+    <form action="/goods/{{$good->id}}" class="form__article" method="post" enctype="multipart/form-data">상품 수정
         {{ method_field('PUT') }}
         {!! csrf_field() !!}
         <br>

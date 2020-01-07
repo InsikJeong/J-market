@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -13,7 +14,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts=\App\Cart::get();
+        $user = Auth::id();
+        $carts=\App\Cart::where('user_id',$user)->get();
         $hap = 0;
 
         foreach($carts as $cart){
@@ -43,8 +45,8 @@ class CartController extends Controller
     {
         $goods= \App\Goods::whereId($request->id)->first();
         
-
-        \App\Cart::create([
+        // \App\Cart::user()->cart()->create([
+            $cart = $request->user()->cart()->create([
             'num'=>$goods->num,
             'name'=>$goods->name,
             'price'=>$goods->price,
@@ -53,7 +55,7 @@ class CartController extends Controller
             'count'=>$request->count,
         ]);
         
-        $carts=\App\Cart::get();
+        $carts=\App\Cart::where('user_id',$cart->user_id)->get();
         $hap =0;
 
         foreach($carts as $cart){
@@ -110,7 +112,9 @@ class CartController extends Controller
     }
 
     public function allDel(){
-        \DB::table('carts')->truncate();
+        // \DB::table('carts')->truncate();
+        $id = Auth::id();
+        $cart =\App\Cart::whereId($id)->truncate();
 
         return redirect('/cart');
     }

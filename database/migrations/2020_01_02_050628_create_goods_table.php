@@ -15,11 +15,15 @@ class CreateGoodsTable extends Migration
     {
         Schema::create('goods', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->bigInteger('num');
             $table->string('name');
             $table->bigInteger('price');
             $table->string('comments');
             $table->string('filename');
+
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

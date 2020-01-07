@@ -6,21 +6,32 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 
-class FashionsController extends Controller
+class GoodsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(){
+        return redirect('/');
+    }
+
+    public function fashions()
     {
-        $fashions = \App\Goods::where('num',1)->get();
-        // $foods = \App\Goods::where('num',2)->get();
+        $goods = \App\Goods::where('num',1)->get();
+
+        return view('goods.fashions',compact('goods'));
+    }
+    public function foods()
+    {
+        // $goods = \App\Goods::where('num',1)->get();
+        $goods = \App\Goods::where('num',2)->get();
         // $beautys = \App\Goods::where('num',3)->get();
 
-        return view('fashion.index',compact('fashions'));
-    }
+        return view('goods.foods',compact('goods'));
+    } 
+    
 
     /**
      * Show the form for creating a new resource.
@@ -29,7 +40,7 @@ class FashionsController extends Controller
      */
     public function create()
     {
-        return view('fashion.create');
+        return view('goods.create');
     }
 
     /**
@@ -38,28 +49,40 @@ class FashionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(\App\Http\Requests\FashionRequest $request)
+    public function store(\App\Http\Requests\GoodRequest $request)
     // public function store(Request $request)
     {
-        if($request->hasFile('files')){
-            $files = $request->file('files');
-            foreach($files as $file) {
-                $filename = Str::random().filter_var($file->getClientOriginalName(), FILTER_SANITIZE_URL);
-                
-                $fashion = \App\Goods::create([ 
-                'num'=>1,
-                'name'=>$request->name,
-                'price'=>$request->price,
-                'comments'=>$request->comments,
-                'filename' => $filename,
-                ]);
-
-                $file->move(attachments_path(), $filename);
-            }
+            if($request->hasFile('files')){
+                $files = $request->file('files');
+                foreach($files as $file) {
+                    $filename = Str::random().filter_var($file->getClientOriginalName(), FILTER_SANITIZE_URL);
+                    
+                    $good =  $request->user()->goods()->create([ 
+                    'num'=>1,
+                    'name'=>$request->name,
+                    'price'=>$request->price,
+                    'comments'=>$request->comments,
+                    'filename' => $filename,
+                    ]);
+                    
+                    if (!$good) {
+                        return redirect('/');
+                    }
+    
+                    $file->move(attachments_path(), $filename);
+                }
         }
-
-        return redirect(route('fashions.index'));
-       
+        // if($request->num == 1){
+        //     return redirect(route('goods.fashions'));
+        // }       
+        // else if($request->num == 2){
+        //     return redirect(route('goods.foods'));
+        // }
+        // else{
+        //     return redirect('/');
+        // }
+        return redirect('/');
+    
     }
 
     /**
@@ -70,9 +93,10 @@ class FashionsController extends Controller
      */
     public function show($id)
     {
-        $fashion = \App\Goods::whereId($id)->first();
+        $good = \App\Goods::whereId($id)->first();
 
-        return view('fashion.show',compact('fashion'));
+
+        return view('goods.show',compact('good'));
     }
 
     /**
@@ -85,7 +109,7 @@ class FashionsController extends Controller
     {
         $good = \App\Goods::whereId($id)->first();
 
-        return view('fashion.edit',compact('good'));
+        return view('goods.edit',compact('good'));
     }
 
     /**
@@ -95,7 +119,7 @@ class FashionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(\App\Http\Requests\FashionRequest $request, $id)
+    public function update(\App\Http\Requests\GoodRequest $request, $id)
     {
         if($request->hasFile('files')){
             $files = $request->file('files');
@@ -114,10 +138,10 @@ class FashionsController extends Controller
                 $file->move(attachments_path(), $filename);
             }
         }
-        $fashion = \App\Goods::where('id',$id)->first();
+        $good = \App\Goods::where('id',$id)->first();
 
 
-        return view('fashion.show',compact('fashion'));
+        return view('goods.show',compact('good'));
        
     }
 

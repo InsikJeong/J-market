@@ -36,4 +36,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function cart(){
+        //many쪽 관계라서 복수형
+        return $this->hasMany(Cart::class);
+        // this(사용자)는 많은  가지고 있다.
+    }
+    public function goods(){
+        //many쪽 관계라서 복수형
+        return $this->hasMany(Goods::class);
+        // this(사용자)는 많은  가지고 있다.
+    }
 }

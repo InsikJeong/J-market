@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form class="creForm"action="{{route('fashions.store')}}" method="POST" enctype="multipart/form-data">
+    <form class="creForm"action="{{route('goods.cre')}}" method="POST" enctype="multipart/form-data">
         {!! csrf_field() !!}
         <h3>상품 등록</h3>
         <br>
@@ -21,12 +21,17 @@
         <input type="file" name="files[]">
         {!! $errors->first('files','<span class="form-error">:message</span>') !!}
         <br>
+        <br>
+        <br>
 
         <button>등록 완료</button>
     </form> 
 @stop
 @section('style')
     <style>
+        .hide1{
+            display:none;
+        }
         .creForm>input{
             width:740px;
             margin-left:30px;

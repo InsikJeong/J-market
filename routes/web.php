@@ -26,7 +26,24 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //상품들
-Route::resource('/fashions','FashionsController');
+Route::resource('/goods','GoodsController');
+Route::get('/fashions', [
+    'as' => 'goods.fashions',
+    'uses' => 'GoodsController@fashions',
+]);
+Route::get('/foods', [
+    'as' => 'goods.foods',
+    'uses' => 'GoodsController@foods',
+]);
+//C
+Route::post('/goods/store', [
+    'as' => 'goods.cre',
+    'uses' => 'GoodsController@store',
+]);
+// Route::post('/goods/create', [
+//     'as' => 'goods.cre',
+//     'uses' => 'GoodsController@create',
+// ]);
 
 // 결제
 Route::resource('/buy','BuyController');

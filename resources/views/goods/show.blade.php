@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="container-div">
-        <img src="/goods/{{$fashion->filename}}" alt="이미지없음">
+        <img src="/goods/{{$good->filename}}" alt="이미지없음">
         <div class="conDiv">
-            <h3>{{$fashion->name}}</h3>
+            <h3>{{$good->name}}</h3>
             <br>
-            <p>{{$fashion->comments}}</p>
+            <p>{{$good->comments}}</p>
             <br>
             <br>
             <br>
@@ -19,11 +19,15 @@
             <form action="{{route('cart.store')}}" method='POST' id="paymentForm">
                 {!! csrf_field() !!}
                 <input id="count" type="number" name="count" value=1> 개 
-                <input type="text" name='id' class="showId" value="{{$fashion->id}}">
+                <input type="text" name='id' class="showId" value="{{$good->id}}">
+                
                 <br>
                 <br>
-                <label class="btn btnBuy" onclick="buy({{$fashion->id}})">바로 구매</label>
-                <button class="btn btnCart">장바구니 담기</button>
+                <label class="btn btnBuy" onclick="buy({{$good->id}})">바로 구매</label>
+                @if(Auth::user())
+                    <button class="btn btnCart">장바구니 담기</button>
+                @else
+                @endif
             </form>
         </div>
     </div> 
@@ -31,8 +35,8 @@
     <br>
     <br>
     
-    <a class="btn btn-primary btnEdit" href="/goods/{{$fashion->id}}/edit">상품 수정</a>
-    <label class="btn btn-danger btnDel" id="btnDel{{$fashion->id}}" onclick="del({{$fashion->id}})">상품 삭제</label>            
+    <a class="btn btn-primary btnEdit" href="/goods/{{$good->id}}/edit">상품 수정</a>
+    <label class="btn btn-danger btnDel" id="btnDel{{$good->id}}" onclick="del({{$good->id}})">상품 삭제</label>            
     
     <br>
     <br>
@@ -74,10 +78,10 @@
                 console.log("이프문");
                 $.ajax({
                     type:"DELETE",
-                    url: '/fashions/'+id
-                }).then(function(e){
+                    url: '/goods/'+id
+                }).then(function(id){
                     console.log("덴");
-                    window.location.href='/fashions';
+                        window.location.href='/';
                 },function(e){
                     console.log(e);
                 });
