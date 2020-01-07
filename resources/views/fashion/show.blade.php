@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-div">
-        <img src="/fashion/{{$fashion->filename}}" alt="이미지없음">
+        <img src="/goods/{{$fashion->filename}}" alt="이미지없음">
         <div class="conDiv">
             <h3>{{$fashion->name}}</h3>
             <br>
@@ -16,13 +16,13 @@
             <br>
             <br>
             <br>
-            <form action="{{route('cart.store')}}" method='POST'>
+            <form action="{{route('cart.store')}}" method='POST' id="paymentForm">
                 {!! csrf_field() !!}
-                <input type="number" name="count" value=1> 개 
+                <input id="count" type="number" name="count" value=1> 개 
                 <input type="text" name='id' class="showId" value="{{$fashion->id}}">
                 <br>
                 <br>
-                <a href="/buy" class="btn btnBuy">바로 구매</a>
+                <label class="btn btnBuy" onclick="buy({{$fashion->id}})">바로 구매</label>
                 <button class="btn btnCart">장바구니 담기</button>
             </form>
         </div>
@@ -31,7 +31,7 @@
     <br>
     <br>
     
-    <a class="btn btn-primary btnEdit" href="/fashions/{{$fashion->id}}/edit">상품 수정</a>
+    <a class="btn btn-primary btnEdit" href="/goods/{{$fashion->id}}/edit">상품 수정</a>
     <label class="btn btn-danger btnDel" id="btnDel{{$fashion->id}}" onclick="del({{$fashion->id}})">상품 삭제</label>            
     
     <br>
@@ -52,22 +52,36 @@
     <script>        
         var btnDiv = document.getElementById('btnDiv');
 
+        function buy(id){
+            console.log('buy 실행!');
+            // var form = $('#paymentForm')[0];
+            // var data = new FormData(form);
+            // data.append('_method','put');
+            // method:'PUT',
+            // @method('PUT')
+            // console.log(form);
+            var count = document.getElementById('count').value;
+            console.log(count);
+            var data ={'id':id,'count':count};
+            window.location.href ='http://127.0.0.1:8000/buy';
+        }
+
         function del(id){
             console.log(id);
 
             $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
-        if(confirm('상품을 삭제합니다.')){
-            console.log("이프문");
-            $.ajax({
-                type:"DELETE",
-                url: '/fashions/'+id
-            }).then(function(e){
-                console.log("덴");
-                window.location.href='/fashions';
-            },function(e){
-                console.log(e);
-            });
-        }
+            if(confirm('상품을 삭제합니다.')){
+                console.log("이프문");
+                $.ajax({
+                    type:"DELETE",
+                    url: '/fashions/'+id
+                }).then(function(e){
+                    console.log("덴");
+                    window.location.href='/fashions';
+                },function(e){
+                    console.log(e);
+                });
+            }
         }
 
 
@@ -109,6 +123,7 @@
             display:none;
         }
         .btnBuy{
+            margin-top:10px;
             width:200px;
             height:50px;
             line-height:40px;

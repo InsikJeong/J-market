@@ -32,3 +32,10 @@ Route::resource('/fashions','FashionsController');
 Route::resource('/buy','BuyController');
 //장바구니
 Route::resource('/cart','CartController');
+//장바구니 비우기
+Route::post('/cart/all','CartController@allDel');
+//검색
+Route::post('/search', [
+    'as' => 'search.index',
+    'uses' => 'SearchController@index',
+]);

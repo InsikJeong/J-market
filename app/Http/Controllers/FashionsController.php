@@ -54,7 +54,7 @@ class FashionsController extends Controller
                 'filename' => $filename,
                 ]);
 
-                $file->move(fashions_attachments_path(), $filename);
+                $file->move(attachments_path(), $filename);
             }
         }
 
@@ -111,7 +111,7 @@ class FashionsController extends Controller
                 ]);
         
 
-                $file->move(fashions_attachments_path(), $filename);
+                $file->move(attachments_path(), $filename);
             }
         }
         $fashion = \App\Goods::where('id',$id)->first();

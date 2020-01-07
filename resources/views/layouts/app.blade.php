@@ -30,12 +30,8 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     J Market
                 </a>
-                <div class="search-div">
-                    <form action="" class="search-Form">
-                        <input class="search-bar" type="text" placeholder="Search">
-                        <button><img class="search-img" src="/main/search.jpg" alt="search"></button>
-                    </form>
-                </div>
+                @include('layouts.search')
+               
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

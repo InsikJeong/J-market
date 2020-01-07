@@ -13,7 +13,14 @@ class CartController extends Controller
      */
     public function index()
     {
+        $carts=\App\Cart::get();
+        $hap = 0;
 
+        foreach($carts as $cart){
+            $hap += $cart->price*$cart->count;
+        }
+
+        return view('payment.cart',compact('carts','hap'));
     }
 
     /**
@@ -47,8 +54,13 @@ class CartController extends Controller
         ]);
         
         $carts=\App\Cart::get();
+        $hap =0;
 
-        return view('payment.cart',compact('carts'));
+        foreach($carts as $cart){
+            $hap += $cart->price*$cart->count;
+        }
+
+        return view('payment.cart',compact('carts','hap'));
     }
 
     /**
@@ -92,6 +104,14 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cart =\App\Cart::whereId($id)->delete();
+    
+        return response()->json([],204);
+    }
+
+    public function allDel(){
+        \DB::table('carts')->truncate();
+
+        return redirect('/cart');
     }
 }

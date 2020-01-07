@@ -9,4 +9,8 @@
     {
         return public_path('fashion'.($path ? DIRECTORY_SEPARATOR.$path : $path));
     }
+    function attachments_path($path = '')
+    {
+        return public_path('goods'.($path ? DIRECTORY_SEPARATOR.$path : $path));
+    }
 ?>

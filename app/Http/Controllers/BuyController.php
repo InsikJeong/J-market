@@ -34,7 +34,13 @@ class BuyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $good=\App\Goods::whereId($request->id)->first();
+        $good = $request->id;
+        $count = $request->count;
+
+        // return view('payment.pay',compact('good','count'));
+        return response()->json(['good','count'],201);
+
     }
 
     /**
@@ -45,7 +51,7 @@ class BuyController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -54,9 +60,8 @@ class BuyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id) 
     {
-        //
     }
 
     /**

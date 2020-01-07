@@ -9,7 +9,7 @@
     @forelse ($fashions as $goods)
         <div id="fashion{{$goods->id}}" class="fashionDiv">
             <div id="imgDiv" class="imgDiv">
-                <img src="/fashion/{{$goods->filename}}" alt="이미지없음" onclick="imgClick({{$goods->num}},{{$goods->id}})">
+                <img src="/goods/{{$goods->filename}}" alt="이미지없음" onclick="imgClick({{$goods->num}},{{$goods->id}})">
             </div>
             <div class="nameDiv">
                 <a href="{{route('fashions.show',$goods->id)}}">{{$goods->name}}</a>
