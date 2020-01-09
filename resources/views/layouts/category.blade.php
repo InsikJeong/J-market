@@ -1,9 +1,9 @@
 <div class="navbar-div">
     <h3 class="cartegory">Cartegory</h3>
-    <div onclick="re(1)">
+    <div onclick="re('fashion')">
         <a href="/fashions">Fashion</a>
     </div>
-    <div onclick="re(2)">
+    <div onclick="re('food')">
         <a href="/foods">Food</a>
     </div>
     <div>

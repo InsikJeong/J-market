@@ -33,7 +33,7 @@
                 @forelse ($goods as $good)
                     <div id="good{{$good->id}}" class="goodDiv">
                         <div id="imgDiv" class="imgDiv">
-                            <img src="/goods/{{$good->filename}}" alt="이미지없음" onclick="imgClick({{$good->num}},{{$good->id}})">
+                            <img src="/goods/{{$good->filename}}" alt="이미지없음" onclick="imgClick({{$good->id}})">
                         </div>
                         <div class="nameDiv">
                             <a href="{{route('goods.show',$good->id)}}">{{$good->name}}</a>

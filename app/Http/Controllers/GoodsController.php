@@ -19,14 +19,14 @@ class GoodsController extends Controller
 
     public function fashions()
     {
-        $goods = \App\Goods::where('num',1)->get();
+        $goods = \App\Goods::where('num','fashion')->get();
 
         return view('goods.fashions',compact('goods'));
     }
     public function foods()
     {
         // $goods = \App\Goods::where('num',1)->get();
-        $goods = \App\Goods::where('num',2)->get();
+        $goods = \App\Goods::where('num','food')->get();
         // $beautys = \App\Goods::where('num',3)->get();
 
         return view('goods.foods',compact('goods'));
@@ -58,7 +58,7 @@ class GoodsController extends Controller
                     $filename = Str::random().filter_var($file->getClientOriginalName(), FILTER_SANITIZE_URL);
                     
                     $good =  $request->user()->goods()->create([ 
-                    'num'=>1,
+                    'num'=>$request->num,
                     'name'=>$request->name,
                     'price'=>$request->price,
                     'comments'=>$request->comments,
